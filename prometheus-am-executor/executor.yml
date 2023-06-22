@@ -1,0 +1,18 @@
+---
+listen_address: ":9099"
+verbose: false
+# tls_key: "certs/key.pem"
+# tls_crt: "certs/cert.pem"
+commands:
+  - cmd: echo
+    args: ["banana", "tomato"]
+    match_labels:
+      "env": "testing"
+      "owner": "me"
+    notify_on_failure: false
+  - cmd: /bin/true
+    max: 3
+    ignore_resolved: true
+  - cmd: /etc/prometheus-am-executor/examples/script.sh
+    args: ["10s"]
+    resolved_signal: SIGUSR1
